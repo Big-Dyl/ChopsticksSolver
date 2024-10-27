@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/ChopsticksSolver/static/css/main.829afe53.css",
-    "main.js": "/ChopsticksSolver/static/js/main.1994ff07.js",
-    "static/js/446.9c84a4b0.chunk.js": "/ChopsticksSolver/static/js/446.9c84a4b0.chunk.js",
-    "static/js/440.1aa3ecb3.chunk.js": "/ChopsticksSolver/static/js/440.1aa3ecb3.chunk.js",
+    "main.js": "/ChopsticksSolver/static/js/main.1a89b015.js",
+    "static/js/446.bc40a9f3.chunk.js": "/ChopsticksSolver/static/js/446.bc40a9f3.chunk.js",
+    "static/js/440.59a5a924.chunk.js": "/ChopsticksSolver/static/js/440.59a5a924.chunk.js",
     "static/media/4.png": "/ChopsticksSolver/static/media/4.5c571db309701098661a.png",
     "static/media/3.png": "/ChopsticksSolver/static/media/3.646fcb52bfef8a9b268e.png",
     "static/media/T4.png": "/ChopsticksSolver/static/media/T4.9d00668186d934a3a9f9.png",
@@ -18,12 +18,12 @@
     "static/media/ThreeLines.svg": "/ChopsticksSolver/static/media/ThreeLines.01c85dfe14db4594c49f4e8bac386f21.svg",
     "index.html": "/ChopsticksSolver/index.html",
     "main.829afe53.css.map": "/ChopsticksSolver/static/css/main.829afe53.css.map",
-    "main.1994ff07.js.map": "/ChopsticksSolver/static/js/main.1994ff07.js.map",
-    "446.9c84a4b0.chunk.js.map": "/ChopsticksSolver/static/js/446.9c84a4b0.chunk.js.map",
-    "440.1aa3ecb3.chunk.js.map": "/ChopsticksSolver/static/js/440.1aa3ecb3.chunk.js.map"
+    "main.1a89b015.js.map": "/ChopsticksSolver/static/js/main.1a89b015.js.map",
+    "446.bc40a9f3.chunk.js.map": "/ChopsticksSolver/static/js/446.bc40a9f3.chunk.js.map",
+    "440.59a5a924.chunk.js.map": "/ChopsticksSolver/static/js/440.59a5a924.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.829afe53.css",
-    "static/js/main.1994ff07.js"
+    "static/js/main.1a89b015.js"
   ]
 }
