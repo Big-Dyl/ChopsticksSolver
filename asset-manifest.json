@@ -1,16 +1,29 @@
 {
   "files": {
-    "main.css": "/ChopsticksSolver/static/css/main.f855e6bc.css",
-    "main.js": "/ChopsticksSolver/static/js/main.1b26dfd3.js",
-    "static/js/453.a6a97343.chunk.js": "/ChopsticksSolver/static/js/453.a6a97343.chunk.js",
-    "static/media/logo.svg": "/ChopsticksSolver/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/ChopsticksSolver/static/css/main.829afe53.css",
+    "main.js": "/ChopsticksSolver/static/js/main.1994ff07.js",
+    "static/js/446.9c84a4b0.chunk.js": "/ChopsticksSolver/static/js/446.9c84a4b0.chunk.js",
+    "static/js/440.1aa3ecb3.chunk.js": "/ChopsticksSolver/static/js/440.1aa3ecb3.chunk.js",
+    "static/media/4.png": "/ChopsticksSolver/static/media/4.5c571db309701098661a.png",
+    "static/media/3.png": "/ChopsticksSolver/static/media/3.646fcb52bfef8a9b268e.png",
+    "static/media/T4.png": "/ChopsticksSolver/static/media/T4.9d00668186d934a3a9f9.png",
+    "static/media/2.png": "/ChopsticksSolver/static/media/2.c75b3f989de16c6a92f6.png",
+    "static/media/T3.png": "/ChopsticksSolver/static/media/T3.e7eb49b7d17431433f22.png",
+    "static/media/1.png": "/ChopsticksSolver/static/media/1.7033ecfc96a6cdd61592.png",
+    "static/media/T2.png": "/ChopsticksSolver/static/media/T2.9d4b6018539ad43faee0.png",
+    "static/media/0.png": "/ChopsticksSolver/static/media/0.0c9393cddd0b306b8fc3.png",
+    "static/media/T0.png": "/ChopsticksSolver/static/media/T0.4fd8624e2b5f82d578e8.png",
+    "static/media/T1.png": "/ChopsticksSolver/static/media/T1.c3d8485b56c922ef3b5e.png",
+    "static/media/x.svg": "/ChopsticksSolver/static/media/x.f52a7d36baf4f9187df7e2eda2307a58.svg",
+    "static/media/ThreeLines.svg": "/ChopsticksSolver/static/media/ThreeLines.01c85dfe14db4594c49f4e8bac386f21.svg",
     "index.html": "/ChopsticksSolver/index.html",
-    "main.f855e6bc.css.map": "/ChopsticksSolver/static/css/main.f855e6bc.css.map",
-    "main.1b26dfd3.js.map": "/ChopsticksSolver/static/js/main.1b26dfd3.js.map",
-    "453.a6a97343.chunk.js.map": "/ChopsticksSolver/static/js/453.a6a97343.chunk.js.map"
+    "main.829afe53.css.map": "/ChopsticksSolver/static/css/main.829afe53.css.map",
+    "main.1994ff07.js.map": "/ChopsticksSolver/static/js/main.1994ff07.js.map",
+    "446.9c84a4b0.chunk.js.map": "/ChopsticksSolver/static/js/446.9c84a4b0.chunk.js.map",
+    "440.1aa3ecb3.chunk.js.map": "/ChopsticksSolver/static/js/440.1aa3ecb3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.1b26dfd3.js"
+    "static/css/main.829afe53.css",
+    "static/js/main.1994ff07.js"
   ]
 }
