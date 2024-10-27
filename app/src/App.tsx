@@ -56,7 +56,7 @@ const SideMenu = memo(({status,turn,newgame,topai,botai,doleftovers}:{status:num
                 <br/>
                 <li><input type = 'checkbox' id = "doleftovers" defaultChecked onChange = {doleftovers}/> {'do leftovers'}</li>
                 <br/>
-                <li><input type = 'number' id = "depth" style = {{width:'16%'}} defaultValue = {20} min = '1' max = '20' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setDepth(parseInt(e.target.value) + 1);}}/> {' engine depth'}</li>
+                <li><input type = 'number' id = "depth" style = {{width:'16%'}} defaultValue = {20} min = '1' max = '30' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setDepth(parseInt(e.target.value) + 1);}}/> {' engine depth'}</li>
                 <br/>
                 <li><button className = "checkBox" onClick={newgame}>New Game</button></li>
             </ul>
@@ -78,7 +78,7 @@ const Game = memo(() => {
   const [mergeoptions, setmergeoptions] = useState([[-1],[-1]]);
   const [turn, setTurn] = useState(true) // true for bottom players turn
   const [selection, editSelection] = useState(-1);
-  const [state, editState] = useState([1,1,1,1]); //index 0 is bottom left, 1 is bottom right, 2 is top left, 3 is top right
+  const [state, editState] = useState([3,3,1,3]); //index 0 is bottom left, 1 is bottom right, 2 is top left, 3 is top right
   let getmove = new Worker(new URL('./play-move-worker.ts', import.meta.url), { type: 'module' });
   getmove.onmessage = (e) => {
     editState(e.data);

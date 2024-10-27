@@ -48,8 +48,8 @@ export class Solver{
         }
     }
     solveBoard = (isMaximizing:boolean,depth:number,alpha:number,beta:number) => {
-        if(this.hashTable.has([this.status, isMaximizing])){
-            return this.hashTable.get([this.status, isMaximizing]);
+        if(this.hashTable.has(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`)){
+            return this.hashTable.get(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`);
         }
         if(depth <= 0){
             return 0;
@@ -65,13 +65,7 @@ export class Solver{
             let bestScore = -Infinity;
             for(let i = 0; i < moves.length; i++){
                 let save = [[this.status[0][0],this.status[0][1]],[this.status[1][0],this.status[1][1]]];
-                try{ //just some debugging stuff (leaving this here just in case)
-                    this.playMove(moves[i]);
-                    } catch(e){
-                        console.log(this.status);
-                        console.log(moves[i]);
-                        console.error(e)
-                    }
+                this.playMove(moves[i]);
                 let score = this.solveBoard(false,depth-1,alpha,beta);
                 this.status = [[save[0][0],save[0][1]],[save[1][0],save[1][1]]];
                 if(score > bestScore){
@@ -79,10 +73,10 @@ export class Solver{
                 }
                 alpha = Math.max(alpha, bestScore)
                 if(beta <= alpha){
-                    break;
+                    //break;
                 }
             }
-            this.hashTable.set(parseInt(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}`,2), bestScore);
+            this.hashTable.set(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`, bestScore);
             return bestScore;
         } else {
             if(this.status[0][0] == 0 && this.status[0][1] == 0){
@@ -95,13 +89,7 @@ export class Solver{
             let bestScore = Infinity;
             for(let i = 0; i < moves.length; i++){
                 let save = [[this.status[0][0],this.status[0][1]],[this.status[1][0],this.status[1][1]]];
-                try{ //just some debugging stuff (leacing this here just in case)
                 this.playMove(moves[i]);
-                } catch(e){
-                    console.log(this.status);
-                    console.log(moves[i]);
-                    console.error(e)
-                }
                 let score = this.solveBoard(true,depth-1,alpha,beta);
                 this.status = [[save[0][0],save[0][1]],[save[1][0],save[1][1]]];
                 if(score < bestScore){
@@ -109,10 +97,10 @@ export class Solver{
                 }
                 beta = Math.min(beta, bestScore)
                 if(beta <= alpha){
-                    break;
+                    //break;
                 }
             }
-            this.hashTable.set(parseInt(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}`,2), bestScore);
+            this.hashTable.set(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`, bestScore);
             return bestScore;
         }
     }
