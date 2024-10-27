@@ -4,9 +4,10 @@ import opnbtn from './img/ThreeLines.svg'
 import clsbtn from './img/x.svg'; 
 import './App.css';
 const SideMenu = memo(({status,turn,newgame,topai,botai,doleftovers}:{status:number[],turn:boolean,newgame:()=>void,topai:()=>void,botai:()=>void,doleftovers:()=>void}) => {
-  const [depth, setDepth] = useState(21);
+  const [depth, setDepth] = useState(31);
   const [isOpen, Open] = useState(true);
   const [evaluation, setEvaluation] = useState('calculating...');
+  const [leftovers,setleftovers] = useState(true);
   let evaluate = new Worker(new URL('./eval-worker.ts', import.meta.url), { type: 'module' });
   evaluate.onmessage = (e) => {
     if(e.data > 0){
@@ -20,7 +21,7 @@ const SideMenu = memo(({status,turn,newgame,topai,botai,doleftovers}:{status:num
   useEffect(()=>{
     evaluate.postMessage([status, turn, depth, (document.getElementById('doleftovers') as HTMLInputElement).checked]);
     setEvaluation('calculating...')
-  },[status, turn]);
+  },[status, turn, depth, leftovers]);
   const closeNav = () => {
       Open(false);
       (document.getElementsByClassName('BottomLeft')[0] as HTMLElement).style.left = '15%';
@@ -40,33 +41,33 @@ const SideMenu = memo(({status,turn,newgame,topai,botai,doleftovers}:{status:num
       (document.getElementsByClassName('BigText')[0] as HTMLElement).style.left = '60%';
   }
   return(
-    <div className = 'SideMenu' style = {{width: isOpen ? '20%' : '5%', backgroundColor: isOpen ? '#ddd' : '#fff'}}>
-      {isOpen && 
-        <nav>
-          <>
-          <span>
-          <h1 style = {{fontSize:'1.7em'}}>Chopsticks Solver</h1>
-          <img src = {clsbtn} onClick={()=>{closeNav()}} style = {{width:'5%', position: 'absolute', top: '1%', right:'1%'}}/>
-          <ul>
-                <li>{evaluation}</li>
-                <br/>
-                <li><input type = 'checkbox' id = "topisai" defaultChecked onChange = {topai}/> {' top player is AI'}</li>
-                <br/>
-                <li><input type = 'checkbox' id = "botisai" onChange = {botai}/> {' bottom player is AI'}</li>
-                <br/>
-                <li><input type = 'checkbox' id = "doleftovers" defaultChecked onChange = {doleftovers}/> {'do leftovers'}</li>
-                <br/>
-                <li><input type = 'number' id = "depth" style = {{width:'16%'}} defaultValue = {20} min = '1' max = '30' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setDepth(parseInt(e.target.value) + 1);}}/> {' engine depth'}</li>
-                <br/>
-                <li><button className = "checkBox" onClick={newgame}>New Game</button></li>
-            </ul>
-          </span>
-          </>
-        </nav>   
-      }
+    <div>
       {!isOpen &&
-        <img src = {opnbtn} onClick={()=>{openNav()}} style = {{width:'50%'}}/>
+        <img src = {opnbtn} onClick={()=>{openNav()}} style = {{width:'5%'}}/>
       }
+      <div className = 'SideMenu' style = {{width: isOpen ? '20%' : '0%', backgroundColor: isOpen ? '#ddd' : '#fff'}}>
+          <nav>
+            <>
+            <span>
+            <h1 style = {{fontSize:'1.7em', display : isOpen ? "" : "none"}}>Chopsticks Solver</h1>
+            <img src = {clsbtn} onClick={()=>{closeNav()}} style = {{width:'5%', position: 'absolute', top: '1%', right:'1%' , display : isOpen ? "" : "none"}}/>
+            <ul style = {{display : isOpen ? "" : "none"}}>
+                  <li>{evaluation}</li>
+                  <br/>
+                  <li><input type = 'checkbox' id = "topisai" defaultChecked onChange = {topai}/> {' top player is AI'}</li>
+                  <br/>
+                  <li><input type = 'checkbox' id = "botisai" onChange = {botai}/> {' bottom player is AI'}</li>
+                  <br/>
+                  <li><input type = 'checkbox' id = "doleftovers" defaultChecked onChange = {()=>{doleftovers();setleftovers(!leftovers)}}/> {'do leftovers'}</li>
+                  <br/>
+                  <li><input type = 'number' id = "depth" style = {{width:'16%'}} defaultValue = {30} min = '1' max = '50' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {setDepth(parseInt(e.target.value) + 1);}}/> {' engine depth'}</li>
+                  <br/>
+                  <li><button onClick={newgame}>New Game</button></li>
+              </ul>
+            </span>
+            </>
+          </nav>   
+      </div>
     </div>
   )
 });
@@ -78,7 +79,7 @@ const Game = memo(() => {
   const [mergeoptions, setmergeoptions] = useState([[-1],[-1]]);
   const [turn, setTurn] = useState(true) // true for bottom players turn
   const [selection, editSelection] = useState(-1);
-  const [state, editState] = useState([3,3,1,3]); //index 0 is bottom left, 1 is bottom right, 2 is top left, 3 is top right
+  const [state, editState] = useState([1,1,1,1]); //index 0 is bottom left, 1 is bottom right, 2 is top left, 3 is top right
   let getmove = new Worker(new URL('./play-move-worker.ts', import.meta.url), { type: 'module' });
   getmove.onmessage = (e) => {
     editState(e.data);

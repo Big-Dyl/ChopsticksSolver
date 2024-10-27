@@ -6,7 +6,7 @@ export class Solver{
         this.status = [[s[0],s[1]],[s[2],s[3]]];
         this.doleftovers = d;
     }
-    getBestMove = (isMaximizing:boolean,depth:number,alpha:number,beta:number) => {
+    getBestMove = (isMaximizing:boolean,depth:number) => {
         if(isMaximizing){
             let moves = this.getMoves(0);
             let bestScore = -Infinity;
@@ -14,15 +14,11 @@ export class Solver{
             for(let i = 0; i < moves.length; i++){
                 let save = [[this.status[0][0],this.status[0][1]],[this.status[1][0],this.status[1][1]]];
                 this.playMove(moves[i]);
-                let score = this.solveBoard(false,depth-1,alpha,beta);
+                let score = this.solveBoard(false,depth-1);
                 this.status = [[save[0][0],save[0][1]],[save[1][0],save[1][1]]];
                 if(score > bestScore){
                     bestScore = score; 
                     bestMove = moves[i];
-                }
-                alpha = Math.max(alpha, bestScore)
-                if(beta <= alpha){
-                    break;
                 }
             }
             return bestMove;
@@ -33,71 +29,53 @@ export class Solver{
             for(let i = 0; i < moves.length; i++){
                 let save = [[this.status[0][0],this.status[0][1]],[this.status[1][0],this.status[1][1]]];
                 this.playMove(moves[i]);
-                let score = this.solveBoard(true,depth-1,alpha,beta);
+                let score = this.solveBoard(true,depth-1);
                 this.status = [[save[0][0],save[0][1]],[save[1][0],save[1][1]]];
                 if(score < bestScore){
                     bestScore = score;
                     bestMove = moves[i]; 
                 }
-                beta = Math.min(beta, bestScore)
-                if(beta <= alpha){
-                    break;
-                }
             }
             return bestMove;
         }
     }
-    solveBoard = (isMaximizing:boolean,depth:number,alpha:number,beta:number) => {
+    solveBoard = (isMaximizing:boolean,depth:number) => {
         if(this.hashTable.has(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`)){
             return this.hashTable.get(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`);
         }
         if(depth <= 0){
             return 0;
         }
+        if(this.status[0][0] == 0 && this.status[0][1] == 0){
+            return -depth;
+        }
+        if(this.status[1][0] == 0 && this.status[1][1] == 0){
+            return depth;
+        }
         if(isMaximizing){
-            if(this.status[1][0] == 0 && this.status[1][1] == 0){
-                return depth;
-            }
-            if(this.status[0][0] == 0 && this.status[0][1] == 0){
-                return -depth;
-            }
             let moves = this.getMoves(0);
             let bestScore = -Infinity;
             for(let i = 0; i < moves.length; i++){
                 let save = [[this.status[0][0],this.status[0][1]],[this.status[1][0],this.status[1][1]]];
                 this.playMove(moves[i]);
-                let score = this.solveBoard(false,depth-1,alpha,beta);
+                let score = this.solveBoard(false,depth-1);
                 this.status = [[save[0][0],save[0][1]],[save[1][0],save[1][1]]];
                 if(score > bestScore){
                     bestScore = score; 
-                }
-                alpha = Math.max(alpha, bestScore)
-                if(beta <= alpha){
-                    //break;
                 }
             }
             this.hashTable.set(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`, bestScore);
             return bestScore;
         } else {
-            if(this.status[0][0] == 0 && this.status[0][1] == 0){
-                return -depth;
-            }
-            if(this.status[1][0] == 0 && this.status[1][1] == 0){
-                return depth;
-            }
             let moves = this.getMoves(1);
             let bestScore = Infinity;
             for(let i = 0; i < moves.length; i++){
                 let save = [[this.status[0][0],this.status[0][1]],[this.status[1][0],this.status[1][1]]];
                 this.playMove(moves[i]);
-                let score = this.solveBoard(true,depth-1,alpha,beta);
+                let score = this.solveBoard(true,depth-1);
                 this.status = [[save[0][0],save[0][1]],[save[1][0],save[1][1]]];
                 if(score < bestScore){
                     bestScore = score; 
-                }
-                beta = Math.min(beta, bestScore)
-                if(beta <= alpha){
-                    //break;
                 }
             }
             this.hashTable.set(`${this.status[0][0]}${this.status[0][1]}${this.status[1][0]}${this.status[1][1]}${isMaximizing ? 1 : 0}d${depth}`, bestScore);
